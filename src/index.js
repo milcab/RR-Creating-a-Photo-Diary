@@ -1,3 +1,5 @@
+import { koalas } from './koalas.js'
+import { renderKoalaCardContent } from './card_content'
 
 let activeKoala = null
 
@@ -9,9 +11,9 @@ let selectKoala = koala => {
 
 // Called once when the page loads, and again every time a koala is selected
 let render = () => {
-    let oldPage=  document.querySelector('.koala-container')
+    let oldPage = document.querySelector('.koala-container')
     let newPage;
-    if(activeKoala){
+    if (activeKoala) {
         newPage = renderActiveKoala(activeKoala)
     } else {
         newPage = renderKoalaList(koalas)
@@ -27,7 +29,7 @@ let renderKoalaList = koalas => {
 
     koalaContainer.setAttribute('class', 'ui items')
 
-    koalas.forEach( koala => {
+    koalas.forEach(koala => {
         let koalaCard = renderKoalaCard(koala)
         koalaContainer.append(koalaCard)
     })
@@ -67,30 +69,6 @@ let renderKoalaCardImage = koala => {
     imageContainer.append(koalaImage)
 
     return imageContainer
-}
-
-// Renders the content of a koala card (their name and description)
-let renderKoalaCardContent = koala => {
-    let koalaContent = document.createElement('div')
-    koalaContent.setAttribute('class', 'content')
-
-    let header = document.createElement('div')
-    header.setAttribute('class', 'header')
-    header.append(koala.name)
-
-    let descriptionParagraph = document.createElement('p')
-    descriptionParagraph.append(koala.description)
-
-    let descriptionContainer = document.createElement('div')
-    descriptionContainer.setAttribute('class', 'description')
-    descriptionContainer.append(descriptionParagraph)
-
-    koalaContent.append(
-        header,
-        descriptionContainer
-    )
-
-    return koalaContent
 }
 
 // Renders a big image of a selected koala
